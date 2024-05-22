@@ -21,10 +21,7 @@ struct Story: Codable, Identifiable {
     struct Author: Codable {
         let id: Int
         let name: String
-        let authorUrl: String
-        let avatar: String
-        let twitterHandle: String
-        let hasNotifications: Bool
-        let isActive: Bool
+        let avatar: String?
+        let twitterHandle: String?
     }
 }

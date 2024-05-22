@@ -14,6 +14,8 @@ struct NetworkService {
     func request<T: Decodable>(endpoint: String) async throws -> T {
         let request = Request<T>(path: endpoint)
         
+        client.configuration.decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         return try await client.send(request).value
     }
 }
