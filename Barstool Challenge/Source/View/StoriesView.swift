@@ -10,16 +10,22 @@ import SwiftUI
 struct StoriesView: View {
     @StateObject var storiesViewModel = StoriesViewModel()
     
+    private let gridItems = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
-        VStack {
-            List(storiesViewModel.stories) { story in
-                Text(story.title)
-            }
-        }
-        .padding()
-        .task {
-            do {
-                await storiesViewModel.fetchStories()
+        ScrollView {
+            LazyVGrid(columns: gridItems, content: {
+                ForEach(storiesViewModel.stories) { story in
+                    VStack {
+                        Text(story.title)
+                    }
+                }
+            })
+            .padding()
+            .task {
+                do {
+                    await storiesViewModel.fetchStories()
+                }
             }
         }
     }
