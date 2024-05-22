@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5794C2632BFE7CA900CA7208 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C2622BFE7CA900CA7208 /* Story.swift */; };
+		5794C2672BFE7D0F00CA7208 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C2662BFE7D0F00CA7208 /* NetworkService.swift */; };
+		5794C2692BFE81F900CA7208 /* StoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C2682BFE81F900CA7208 /* StoriesViewModel.swift */; };
 		6C301C14297F51BB00915A56 /* Barstool_ChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */; };
 		6C301C16297F51BB00915A56 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C301C15297F51BB00915A56 /* StoriesView.swift */; };
 		6C301C18297F51BC00915A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C301C17297F51BC00915A56 /* Assets.xcassets */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5794C2622BFE7CA900CA7208 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		5794C2662BFE7D0F00CA7208 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		5794C2682BFE81F900CA7208 /* StoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewModel.swift; sourceTree = "<group>"; };
 		6C301C10297F51BB00915A56 /* Barstool Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Barstool Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barstool_ChallengeApp.swift; sourceTree = "<group>"; };
 		6C301C15297F51BB00915A56 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
@@ -35,6 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5794C2642BFE7CB500CA7208 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C301C15297F51BB00915A56 /* StoriesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5794C2652BFE7CBC00CA7208 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5794C2622BFE7CA900CA7208 /* Story.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6C301C07297F51BB00915A56 = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +103,11 @@
 		6C301C25297F521B00915A56 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5794C2652BFE7CBC00CA7208 /* Model */,
 				6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */,
-				6C301C15297F51BB00915A56 /* StoriesView.swift */,
+				5794C2642BFE7CB500CA7208 /* View */,
+				5794C2662BFE7D0F00CA7208 /* NetworkService.swift */,
+				5794C2682BFE81F900CA7208 /* StoriesViewModel.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -163,8 +188,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5794C2692BFE81F900CA7208 /* StoriesViewModel.swift in Sources */,
 				6C301C16297F51BB00915A56 /* StoriesView.swift in Sources */,
 				6C301C14297F51BB00915A56 /* Barstool_ChallengeApp.swift in Sources */,
+				5794C2672BFE7D0F00CA7208 /* NetworkService.swift in Sources */,
+				5794C2632BFE7CA900CA7208 /* Story.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

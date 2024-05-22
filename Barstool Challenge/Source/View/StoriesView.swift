@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct StoriesView: View {
+    @StateObject var storiesViewModel = StoriesViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            List(storiesViewModel.stories) { story in
+                Text(story.title)
+            }
         }
         .padding()
+        .task {
+            do {
+                await storiesViewModel.fetchStories()
+            }
+        }
     }
 }
 
