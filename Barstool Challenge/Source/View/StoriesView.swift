@@ -10,7 +10,8 @@ import SwiftUI
 struct StoriesView: View {
     @StateObject var storiesViewModel = StoriesViewModel()
     
-    private let gridItems = [GridItem(.flexible(), alignment: .top), GridItem(.flexible(), alignment: .top)]
+    private let gridItems = [GridItem(.flexible(), spacing: 5, alignment: .top),
+                             GridItem(.flexible(), spacing: 5, alignment: .top)]
     
     private struct DrawingConstants {
         static let thumbnailHeight: CGFloat = 200
@@ -23,11 +24,10 @@ struct StoriesView: View {
         ScrollView {
             LazyVGrid(columns: gridItems, content: {
                 ForEach(storiesViewModel.stories) { story in
-                    NavigationLink(destination: StoryDetailView()) {
+                    NavigationLink(destination: StoryDetailView(story: story)) {
                         VStack(alignment: .leading) {
                             
                             HeaderView(with: story)
-                                .padding(.bottom)
                             
                             AuthorView(with: story)
 
@@ -86,7 +86,7 @@ struct StoriesView: View {
                 if let brandName = story.brandName {
                     Text(brandName)
                         .italic()
-                        .font(.subheadline)
+                        .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }

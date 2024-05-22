@@ -8,7 +8,80 @@
 import SwiftUI
 
 struct StoryDetailView: View {
+    let story: Story
+    @StateObject var storyDetailViewModel = StoryDetailViewModel()
+    
+    private struct DrawingConstants {
+        static let avatarHeight: CGFloat = 40
+        static let avatarWidth: CGFloat = 40
+    }
+    
     var body: some View {
-        Text("Hello, world!")
+        VStack(alignment: .leading) {
+            if let storyDetail = storyDetailViewModel.storyDetail {
+                
+                Group {
+                    Text(storyDetail.title)
+                        .font(.headline)
+                    
+                    AuthorView(with: storyDetail)
+                }
+                .padding(.horizontal)
+
+                
+                if let content = storyDetail.postTypeMeta.standardPost?.rawContent {
+                    WebView(htmlContent: content)
+                }
+                
+            } else {
+                ProgressView()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Image("barstoolLogo")
+                    .resizable()
+                    .scaledToFit()
+            }
+        }
+        .task {
+            do {
+                await storyDetailViewModel.fetchStory(with: story.id)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func AuthorView(with storyDetail: StoryDetail) -> some View {
+        HStack {
+            if let avatar = storyDetail.author.avatar {
+                AsyncImage(url: URL(string: avatar)) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: DrawingConstants.avatarWidth, height: DrawingConstants.avatarHeight)
+                .clipShape(Circle())
+            }
+            VStack(alignment: .leading) {
+                Text(storyDetail.author.name)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                
+                if let brandName = storyDetail.brandName {
+                    Text(brandName)
+                        .italic()
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            
+            Spacer()
+            
+            Label(
+                title: { Text("\(storyDetail.commentCount)") },
+                icon: { Image(systemName: "message.fill") }
+            )
+        }
     }
 }
