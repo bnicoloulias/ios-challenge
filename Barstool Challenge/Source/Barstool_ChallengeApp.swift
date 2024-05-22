@@ -11,7 +11,9 @@ import SwiftUI
 struct Barstool_ChallengeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                StoriesView()
+            }
         }
     }
 }
