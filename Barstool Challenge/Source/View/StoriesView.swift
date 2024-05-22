@@ -23,17 +23,28 @@ struct StoriesView: View {
         ScrollView {
             LazyVGrid(columns: gridItems, content: {
                 ForEach(storiesViewModel.stories) { story in
-                    VStack(alignment: .leading) {
-                        
-                        HeaderView(with: story)
-                            .padding(.bottom)
-                        
-                        AuthorView(with: story)
+                    NavigationLink(destination: StoryDetailView()) {
+                        VStack(alignment: .leading) {
+                            
+                            HeaderView(with: story)
+                                .padding(.bottom)
+                            
+                            AuthorView(with: story)
 
-                        Divider()
+                            Divider()
+                        }
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
             })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image("barstoolLogo")
+                        .resizable()
+                        .scaledToFit()
+                }
+            }
             .task {
                 do {
                     await storiesViewModel.fetchStories()
