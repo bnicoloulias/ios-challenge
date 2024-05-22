@@ -14,6 +14,7 @@
 		5794C26D2BFE983700CA7208 /* StoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C26C2BFE983700CA7208 /* StoryDetail.swift */; };
 		5794C2702BFE990A00CA7208 /* StoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C26F2BFE990A00CA7208 /* StoryDetailViewModel.swift */; };
 		5794C2722BFEAC4700CA7208 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C2712BFEAC4700CA7208 /* WebView.swift */; };
+		5794C2742BFEB40200CA7208 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5794C2732BFEB40200CA7208 /* UtilityExtensions.swift */; };
 		6C301C14297F51BB00915A56 /* Barstool_ChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */; };
 		6C301C16297F51BB00915A56 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C301C15297F51BB00915A56 /* StoriesView.swift */; };
 		6C301C18297F51BC00915A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C301C17297F51BC00915A56 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		5794C26C2BFE983700CA7208 /* StoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetail.swift; sourceTree = "<group>"; };
 		5794C26F2BFE990A00CA7208 /* StoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailViewModel.swift; sourceTree = "<group>"; };
 		5794C2712BFEAC4700CA7208 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		5794C2732BFEB40200CA7208 /* UtilityExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		6C301C10297F51BB00915A56 /* Barstool Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Barstool Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barstool_ChallengeApp.swift; sourceTree = "<group>"; };
 		6C301C15297F51BB00915A56 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		6C301C25297F521B00915A56 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5794C2732BFEB40200CA7208 /* UtilityExtensions.swift */,
 				5794C2652BFE7CBC00CA7208 /* Model */,
 				6C301C13297F51BB00915A56 /* Barstool_ChallengeApp.swift */,
 				5794C2642BFE7CB500CA7208 /* View */,
@@ -216,6 +219,7 @@
 				5794C2702BFE990A00CA7208 /* StoryDetailViewModel.swift in Sources */,
 				5794C2722BFEAC4700CA7208 /* WebView.swift in Sources */,
 				5794C2672BFE7D0F00CA7208 /* NetworkService.swift in Sources */,
+				5794C2742BFEB40200CA7208 /* UtilityExtensions.swift in Sources */,
 				5794C2632BFE7CA900CA7208 /* Story.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

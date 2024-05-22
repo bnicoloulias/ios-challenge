@@ -11,11 +11,6 @@ struct StoryDetailView: View {
     let story: Story
     @StateObject var storyDetailViewModel = StoryDetailViewModel()
     
-    private struct DrawingConstants {
-        static let avatarHeight: CGFloat = 40
-        static let avatarWidth: CGFloat = 40
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
             if let storyDetail = storyDetailViewModel.storyDetail {

@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Story: Codable, Identifiable {
+struct Story: Codable, Identifiable, Hashable {
     let id: Int
     let title: String
     let thumbnail: Thumbnail
     let author: Author
     let brandName: String?
     
-    struct Thumbnail: Codable {
+    struct Thumbnail: Codable, Hashable {
         let raw: String
     }
     
-    struct Author: Codable {
+    struct Author: Codable, Hashable {
         let id: Int
         let name: String
         let avatar: String?
