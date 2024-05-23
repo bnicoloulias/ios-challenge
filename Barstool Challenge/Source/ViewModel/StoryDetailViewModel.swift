@@ -18,7 +18,7 @@ class StoryDetailViewModel: ObservableObject {
     
     func fetchStory(with id: Int) async {
         do {
-            storyDetail = try await networkService.request(endpoint: "/\(id)")
+            storyDetail = try await networkService.request(endpoint: "https://union.barstoolsports.com/v2/stories/\(id)")
         } catch {
             print(error)
         }

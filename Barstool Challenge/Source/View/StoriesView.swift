@@ -35,6 +35,13 @@ struct StoriesView: View {
                         }
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .onAppear {
+                        if story == storiesViewModel.stories.last {
+                            Task {
+                                await storiesViewModel.fetchStories()
+                            }
+                        }
+                    }
                 }
             })
             .navigationBarTitleDisplayMode(.inline)
@@ -46,9 +53,7 @@ struct StoriesView: View {
                 }
             }
             .task {
-                do {
-                    await storiesViewModel.fetchStories()
-                }
+                await storiesViewModel.fetchStories()
             }
         }
     }
