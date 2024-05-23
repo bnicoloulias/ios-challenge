@@ -69,8 +69,10 @@ struct StoriesView: View {
     @ViewBuilder
     private func HeaderView(with story: Story) -> some View {
         Text(story.title)
+            .lineLimit(nil)
             .multilineTextAlignment(.center)
             .font(.headline)
+            .fixedSize(horizontal: false, vertical: true)
         
         AsyncImage(url: URL(string: story.thumbnail.raw)) { image in
             image

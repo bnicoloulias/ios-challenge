@@ -17,7 +17,9 @@ struct StoryDetailView: View {
                 
                 Group {
                     Text(storyDetail.title)
+                        .lineLimit(nil)
                         .font(.headline)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     AuthorView(with: storyDetail)
                 }
