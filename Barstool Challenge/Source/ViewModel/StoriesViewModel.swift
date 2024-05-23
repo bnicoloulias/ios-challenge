@@ -10,12 +10,21 @@ import Foundation
 @MainActor
 class StoriesViewModel: ObservableObject {
     @Published var stories: [Story] = []
+    @Published var searchText: String = ""
     private var isFetching = false
     private var currentPage = 1
     let networkService: NetworkService
     
     init(networkService: NetworkService = NetworkService()) {
         self.networkService = networkService
+    }
+    
+    var filteredStories: [Story] {
+        if searchText.isEmpty {
+            return stories
+        }
+        
+        return stories.filter { $0.title.lowercased().contains(searchText.lowercased()) }
     }
     
     func fetchStories(incrementCount: Bool = false) async {

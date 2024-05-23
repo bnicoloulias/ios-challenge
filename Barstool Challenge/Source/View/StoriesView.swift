@@ -23,7 +23,7 @@ struct StoriesView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: gridItems, content: {
-                ForEach(storiesViewModel.stories) { story in
+                ForEach(storiesViewModel.filteredStories) { story in
                     NavigationLink(destination: StoryDetailView(story: story)) {
                         VStack(alignment: .center) {
                             
@@ -53,6 +53,7 @@ struct StoriesView: View {
                 }
             }
         }
+        .searchable(text: $storiesViewModel.searchText)
         .refreshable {
             await fetchStories()
         }
