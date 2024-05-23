@@ -31,7 +31,7 @@ struct StoryDetail: Codable, Identifiable {
         let standardPost: StandardPost?
         
         struct StandardPost: Codable {
-            let rawContent: String?
+            let content: String?
         }
     }
 }

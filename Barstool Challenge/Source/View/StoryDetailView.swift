@@ -24,7 +24,7 @@ struct StoryDetailView: View {
                 .padding(.horizontal)
 
                 
-                if let content = storyDetail.postTypeMeta.standardPost?.rawContent {
+                if let content = storyDetail.postTypeMeta.standardPost?.content {
                     WebView(htmlContent: content)
                 }
                 
