@@ -18,18 +18,25 @@ class StoriesViewModel: ObservableObject {
         self.networkService = networkService
     }
     
-    func fetchStories() async {
+    func fetchStories(incrementCount: Bool = false) async {
         guard !isFetching else { return }
         isFetching = true
         
         do {
+            if incrementCount {
+                currentPage += 1
+            }
             let getStories: [Story] = try await networkService.request(endpoint: "https://union.barstoolsports.com/v2/stories/latest?type=standard_post&page=\(currentPage)&limit=25")
-            stories.append(contentsOf: getStories)
-            currentPage += 1
+            let uniqueStories = getStories.filter { story in
+                !stories.contains(where: { $0.id == story.id })
+            }
+            stories.append(contentsOf: uniqueStories)
         } catch {
             print(error)
         }
         
         isFetching = false
+        
+        print(currentPage)
     }
 }
