@@ -32,7 +32,6 @@ class StoriesViewModel: ObservableObject {
     func loadStoriesFormUserDefaults() async {
         let cahchedStories = storyDataManager.loadStories()
         if !cahchedStories.isEmpty {
-            print("Loaded from cache")
             stories = cahchedStories
         } else {
             await fetchStories()
@@ -47,7 +46,6 @@ class StoriesViewModel: ObservableObject {
             if incrementCount {
                 currentPage += 1
             }
-            print("called network")
             let getStories: [Story] = try await networkService.request(endpoint: "https://union.barstoolsports.com/v2/stories/latest?type=standard_post&page=\(currentPage)&limit=25")
             let uniqueStories = getStories.filter { story in
                 !stories.contains(where: { $0.id == story.id })
