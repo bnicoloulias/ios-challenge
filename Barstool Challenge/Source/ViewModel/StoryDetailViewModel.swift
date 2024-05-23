@@ -10,15 +10,10 @@ import Foundation
 @MainActor
 class StoryDetailViewModel: ObservableObject {
     @Published var storyDetail: StoryDetail?
-    let networkService: NetworkService
-    
-    init(networkService: NetworkService = NetworkService()) {
-        self.networkService = networkService
-    }
     
     func fetchStory(with id: Int) async {
         do {
-            storyDetail = try await networkService.request(endpoint: "https://union.barstoolsports.com/v2/stories/\(id)")
+            storyDetail = try await NetworkService.shared.request(path: "/stories/\(id)", query: nil)
         } catch {
             print(error)
         }

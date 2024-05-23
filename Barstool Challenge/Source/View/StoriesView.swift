@@ -38,7 +38,7 @@ struct StoriesView: View {
                     .onAppear {
                         if story == storiesViewModel.stories.last {
                             Task {
-                                await fetchStories(incrementCount: true)
+                                await storiesViewModel.fetchStories(incrementCount: true)
                             }
                         }
                     }
@@ -55,15 +55,11 @@ struct StoriesView: View {
         }
         .searchable(text: $storiesViewModel.searchText)
         .refreshable {
-            await fetchStories()
+            await storiesViewModel.fetchStories(refresh: true)
         }
         .task {
-            await fetchStories()
+            await storiesViewModel.fetchStories()
         }
-    }
-    
-    private func fetchStories(incrementCount: Bool = false) async {
-        await storiesViewModel.fetchStories(incrementCount: incrementCount)
     }
     
     @ViewBuilder

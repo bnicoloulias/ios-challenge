@@ -8,14 +8,30 @@
 import Foundation
 import Get
 
-struct NetworkService {
-    private let client = APIClient(baseURL: URL(string: "https://union.barstoolsports.com/v2/stories"))
+class NetworkService {
+    static let shared = NetworkService()
     
-    func request<T: Decodable>(endpoint: String) async throws -> T {
-        let request = Request<T>(path: endpoint)
+    enum NetworkError: Error {
+        case invalidURL
+        case requestFailed(URLError)
+        case decodingFailed(Error)
+        case unknown(Error)
+    }
+    
+    private let client: APIClient
+
+    private init() {
+        self.client = APIClient(baseURL: URL(string: "https://union.barstoolsports.com/v2"))
+        self.client.configuration.decoder.keyDecodingStrategy = .convertFromSnakeCase
+    }
+
+    func request<T: Decodable>(path: String, query: [(String, String?)]?) async throws -> T {
+        let request = Request<T>(path: path, query: query)
         
-        client.configuration.decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        return try await client.send(request).value
+        do {
+            return try await client.send(request).value
+        } catch {
+            throw NetworkError.unknown(error)
+        }
     }
 }

@@ -13,11 +13,9 @@ class StoriesViewModel: ObservableObject {
     @Published var searchText: String = ""
     private var isFetching = false
     private var currentPage = 1
-    let networkService: NetworkService
     let storyDataManager: StoryDataManager
     
-    init(networkService: NetworkService = NetworkService(), storyDataManager: StoryDataManager = StoryDataManager()) {
-        self.networkService = networkService
+    init(storyDataManager: StoryDataManager = StoryDataManager()) {
         self.storyDataManager = storyDataManager
     }
     
@@ -29,15 +27,22 @@ class StoriesViewModel: ObservableObject {
         return stories.filter { $0.title.lowercased().contains(searchText.lowercased()) }
     }
     
-    func fetchStories(incrementCount: Bool = false) async {
+    func fetchStories(incrementCount: Bool = false, refresh: Bool = false) async {
         guard !isFetching else { return }
         isFetching = true
         
         do {
-            if incrementCount {
+            if refresh {
+                currentPage = 1
+            } else if incrementCount {
                 currentPage += 1
             }
-            let getStories: [Story] = try await networkService.request(endpoint: "https://union.barstoolsports.com/v2/stories/latest?type=standard_post&page=\(currentPage)&limit=25")
+                        
+            let getStories: [Story] = try await NetworkService.shared.request(path: "/stories/latest?type=standard_post", query: [("page","\(currentPage)"),("limit","25")])
+            
+            if refresh {
+                stories.removeAll()
+            }
             let uniqueStories = getStories.filter { story in
                 !stories.contains(where: { $0.id == story.id })
             }
