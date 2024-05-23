@@ -29,15 +29,6 @@ class StoriesViewModel: ObservableObject {
         return stories.filter { $0.title.lowercased().contains(searchText.lowercased()) }
     }
     
-    func loadStoriesFormUserDefaults() async {
-        let cahchedStories = storyDataManager.loadStories()
-        if !cahchedStories.isEmpty {
-            stories = cahchedStories
-        } else {
-            await fetchStories()
-        }
-    }
-    
     func fetchStories(incrementCount: Bool = false) async {
         guard !isFetching else { return }
         isFetching = true
@@ -51,7 +42,6 @@ class StoriesViewModel: ObservableObject {
                 !stories.contains(where: { $0.id == story.id })
             }
             stories.append(contentsOf: uniqueStories)
-            storyDataManager.saveStories(stories)
         } catch {
             print(error)
         }
