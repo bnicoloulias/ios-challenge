@@ -58,7 +58,7 @@ struct StoriesView: View {
             await fetchStories()
         }
         .task {
-            await fetchStories()
+            await storiesViewModel.loadStoriesFormUserDefaults()
         }
     }
     

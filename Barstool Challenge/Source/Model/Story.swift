@@ -25,3 +25,22 @@ struct Story: Codable, Identifiable, Hashable {
         let twitterHandle: String?
     }
 }
+
+class StoryDataManager {
+    private let key = "stories"
+    
+    func saveStories(_ stories: [Story]) {
+        if let encoded = try? JSONEncoder().encode(stories) {
+            UserDefaults.standard.set(encoded, forKey: key)
+        }
+    }
+    
+    func loadStories() -> [Story] {
+        if let savedStories = UserDefaults.standard.object(forKey: key) as? Data {
+            if let decodedStories = try? JSONDecoder().decode([Story].self, from: savedStories) {
+                return decodedStories
+            }
+        }
+        return []
+    }
+}

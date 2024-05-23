@@ -25,7 +25,6 @@ struct StoryDetailView: View {
                 }
                 .padding(.horizontal)
 
-                
                 if let content = storyDetail.postTypeMeta.standardPost?.content {
                     WebView(htmlContent: content)
                 }
@@ -42,9 +41,7 @@ struct StoryDetailView: View {
             }
         }
         .task {
-            do {
-                await storyDetailViewModel.fetchStory(with: story.id)
-            }
+            await storyDetailViewModel.fetchStory(with: story.id)
         }
     }
     
