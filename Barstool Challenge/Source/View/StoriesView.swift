@@ -60,7 +60,10 @@ struct StoriesView: View {
             .font(.headline)
         
         AsyncImage(url: URL(string: story.thumbnail.raw)) { image in
-            image.resizable()
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: DrawingConstants.thumbnailHeight)
         } placeholder: {
             ProgressView()
         }
