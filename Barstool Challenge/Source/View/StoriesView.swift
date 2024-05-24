@@ -8,48 +8,47 @@
 import SwiftUI
 
 struct StoriesView: View {
-    @StateObject var storiesViewModel = StoriesViewModel()
+    @ObservedObject var storiesViewModel: StoriesViewModel
     
     private let gridItems = [GridItem(.flexible(), spacing: 5, alignment: .top),
                              GridItem(.flexible(), spacing: 5, alignment: .top)]
     
-    private struct DrawingConstants {
-        static let thumbnailHeight: CGFloat = 200
-        static let thumbnailWidth: CGFloat = 200
-        static let avatarHeight: CGFloat = 30
-        static let avatarWidth: CGFloat = 30
-    }
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: gridItems, content: {
-                ForEach(storiesViewModel.filteredStories) { story in
-                    NavigationLink(destination: StoryDetailView(story: story)) {
-                        VStack(alignment: .center) {
-                            
-                            HeaderView(with: story)
-                            
-                            AuthorView(with: story)
+            if storiesViewModel.filteredStories.isEmpty {
+                ProgressView()
+                    .padding()
+            } else {
+                LazyVGrid(columns: gridItems, content: {
+                    ForEach(storiesViewModel.filteredStories) { story in
+                        NavigationLink(destination: StoryDetailView(story: story)) {
+                            VStack(alignment: .center) {
+                                
+                                HeaderView(with: story)
+                                
+                                AuthorView(with: story)
 
-                            Divider()
+                                Divider()
+                            }
                         }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .onAppear {
-                        if story == storiesViewModel.stories.last {
-                            Task {
-                                await storiesViewModel.fetchStories(incrementCount: true)
+                        .buttonStyle(PlainButtonStyle())
+                        .onAppear {
+                            if story == storiesViewModel.stories.last {
+                                Task {
+                                    await storiesViewModel.fetchStories(incrementCount: true)
+                                }
                             }
                         }
                     }
-                }
-            })
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image("barstoolLogo")
-                        .resizable()
-                        .scaledToFit()
+                })
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Image("barstoolLogo")
+                            .resizable()
+                            .scaledToFit()
+                    }
                 }
             }
         }
@@ -111,6 +110,6 @@ struct StoriesView: View {
 
 struct StoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        StoriesView()
+        StoriesView(storiesViewModel: StoriesViewModel())
     }
 }
